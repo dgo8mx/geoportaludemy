@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geoportal Loja</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-map-marked-alt"></i>
+                <h1>Geoportal Loja</h1>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Buscar barrio..." class="search-input">
+                <div id="search-results" class="search-results"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="panel">
+                <div class="panel-header">
+                    <i class="fas fa-map"></i>
+                    <h3>Mapa Base</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="basemaps" class="basemap-grid"></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Capas</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="layers" class="layers-container"></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <i class="fas fa-plus"></i>
+                    <h3>Enviar Reporte</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="report-form">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" class="form-input" placeholder="Tu nombre">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tipo">Tipo de Requerimiento</label>
+                            <select id="tipo" class="form-select">
+                                <option value="">Seleccionar...</option>
+                                <option value="Agua Potable">Agua Potable</option>
+                                <option value="Alcantarillado">Alcantarillado</option>
+                                <option value="Alumbrado Público">Alumbrado Público</option>
+                                <option value="Vías">Vías</option>
+                                <option value="Seguridad">Seguridad</option>
+                                <option value="Limpieza">Limpieza</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="comentarios">Comentarios</label>
+                            <textarea id="comentarios" class="form-textarea" placeholder="Describe el problema o requerimiento"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Ubicación del Reporte</label>
+                            <div class="coords-container">
+                                <div class="coords-display">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span id="coords-text">No seleccionada</span>
+                                </div>
+                                
+                                <div class="coords-actions">
+                                    <button type="button" id="get-current-location" class="btn btn-location">
+                                        <i class="fas fa-location-arrow"></i>
+                                        Mi Ubicación
+                                    </button>
+                                </div>
+                                
+                                <div class="coords-actions">
+                                    <button type="button" id="pick-on-map" class="btn btn-map">
+                                        <i class="fas fa-map"></i>
+                                        Seleccionar en Mapa
+                                    </button>
+                                </div>
+                                
+                                <div class="coords-manual">
+                                    <label>Coordenadas Manuales</label>
+                                    <div class="coords-inputs">
+                                        <input type="number" id="lat-input" placeholder="Latitud" step="any" class="coord-input">
+                                    </div>
+                                    <div class="coords-inputs">
+                                        <input type="number" id="lng-input" placeholder="Longitud" step="any" class="coord-input">
+                                    </div>
+                                    <div class="coords-inputs">
+                                        <button type="button" id="set-manual-coords" class="btn btn-set">
+                                            <i class="fas fa-check"></i>
+                                            Establecer
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="report-send" class="btn btn-send">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar Reporte
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="status" class="status-panel"></div>
+        </aside>
+
+        <main class="map-container">
+            <div id="map" class="map"></div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
